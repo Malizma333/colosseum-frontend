@@ -1,6 +1,6 @@
 # Colosseum
 
-Colosseum is a simple, self-hosted competitive programming platform for having programming matches between friends.
+Colosseum is a simple, self-hosted competitive programming platform for having quick programming matches between peers.
 
 ## Contributors
 
