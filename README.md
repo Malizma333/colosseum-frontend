@@ -5,5 +5,5 @@ Colosseum is a simple, self-hosted competitive programming platform for having q
 ## Contributors
 
 [Tobias Bessler](https://github.com/Malizma333)\
-[Robert Boerwinkle](https://github.com/BreannaBre)\
-[Breanna Breedlove](https://github.com/rfboerwinkle)
+[Breanna Breedlove](https://github.com/BreannaBre)\
+[Robert Boerwinkle](https://github.com/rfboerwinkle)
