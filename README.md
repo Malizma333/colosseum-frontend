@@ -2,7 +2,7 @@
 
 Colosseum is a simple, self-hosted competitive programming platform for having quick programming matches between peers.
 
-This is the frontend repository. For the backend repository, see [this other repository](https://github.com/Malizma333/colosseum-backend).
+This is the frontend repository. For the backend repository, see [this other repository](https://github.com/rfboerwinkle/colosseum-backend).
 
 ## Contributors
 
