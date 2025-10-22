@@ -19,15 +19,23 @@
   </header>
 
   <main class="max-w-4xl mx-auto p-6 space-y-6">
+    <div class="flex items-center">
+      <input type="text" readonly id="lobby-link" class="flex-grow border rounded-l p-2 font-mono bg-gray-50" />
+      <button onclick="navigator.clipboard.writeText(document.getElementById('lobby-link').value)"
+        class="px-4 py-2 bg-blue-600 text-white rounded-r hover:bg-blue-700">
+        Copy
+      </button>
+    </div>
+
     <section class="bg-white rounded-xl shadow p-6">
       <h2 class="text-lg font-semibold mb-4">Lobby Settings</h2>
       <form class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label class="block text-sm font-medium text-gray-700">Mode</label>
           <select class="mt-1 w-full border rounded p-2">
-            <option>Classic</option>
             <option>Fastest</option>
-            <option>Shortest Code</option>
+            <option>Shortest</option>
+            <option>Reverse</option>
           </select>
         </div>
         <div>
@@ -38,24 +46,10 @@
     </section>
 
     <section class="bg-white rounded-xl shadow p-6">
-      <h2 class="text-lg font-semibold mb-2">Share Your Lobby</h2>
-      <p class="text-gray-700 mb-3">Friends can join using this link:</p>
-      <div class="flex items-center">
-        <input type="text" readonly id="lobby-link" value="https://colosseum.gg/lobby/ABC123"
-          class="flex-grow border rounded-l p-2 font-mono bg-gray-50" />
-        <button onclick="navigator.clipboard.writeText(document.getElementById('lobby-link').value)"
-          class="px-4 py-2 bg-blue-600 text-white rounded-r hover:bg-blue-700">
-          Copy
-        </button>
-      </div>
-    </section>
-
-    <section class="bg-white rounded-xl shadow p-6">
       <h2 class="text-lg font-semibold mb-4">Players</h2>
       <ul class="space-y-2 text-gray-700">
-        <li>Alice ✅</li>
         <li>You (Host)</li>
-        <li>Waiting for players...</li>
+        <li>Alice</li>
       </ul>
     </section>
 
@@ -67,5 +61,9 @@
     </div>
   </main>
 </body>
+
+<script>
+  document.getElementById('lobby-link').setAttribute("value", window.location)
+</script>
 
 </html>

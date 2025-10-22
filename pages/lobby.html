@@ -14,45 +14,36 @@
     <h1 class="text-xl font-semibold">Colosseum Lobby</h1>
     <button class="px-3 py-1 bg-gray-600 text-white rounded hover:bg-gray-700" hx-get="index.html" hx-target="body"
       hx-swap="outerHTML">
-      Leave
+      Exit
     </button>
   </header>
 
   <main class="max-w-4xl mx-auto p-6 space-y-6">
     <!-- Lobby Info -->
-    <section class="bg-white rounded-xl shadow p-6">
-      <h2 class="text-lg font-semibold mb-2">Lobby Info</h2>
-      <p class="text-gray-700 mb-3">Shareable link:</p>
-      <div class="flex items-center">
-        <input type="text" readonly id="lobby-link" value="https://colosseum.gg/lobby/ABC123"
-          class="flex-grow border rounded-l p-2 font-mono bg-gray-50" />
-        <button onclick="navigator.clipboard.writeText(document.getElementById('lobby-link').value)"
-          class="px-4 py-2 bg-blue-600 text-white rounded-r hover:bg-blue-700">
-          Copy
-        </button>
-      </div>
-    </section>
+    <div class="flex items-center">
+      <input type="text" readonly id="lobby-link" class="flex-grow border rounded-l p-2 font-mono bg-gray-50" />
+      <button onclick="navigator.clipboard.writeText(document.getElementById('lobby-link').value)"
+        class="px-4 py-2 bg-blue-600 text-white rounded-r hover:bg-blue-700">
+        Copy
+      </button>
+    </div>
 
     <!-- Players List -->
     <section id="player-list" class="bg-white rounded-xl shadow p-6" hx-get="/api/lobby/ABC123/players"
       hx-trigger="load, every 5s" hx-swap="outerHTML">
       <h2 class="text-lg font-semibold mb-4">Players</h2>
       <ul class="space-y-2 text-gray-700">
-        <li>You (Ready ✅)</li>
-        <li>Alice (Ready ✅)</li>
-        <li>Bob (Waiting ⏳)</li>
+        <li>Bob (Host)</li>
+        <li>You</li>
       </ul>
     </section>
 
-    <!-- Status -->
-    <section class="bg-white rounded-xl shadow p-6 text-center">
-      <h2 class="text-lg font-semibold mb-2">Status</h2>
-      <p class="text-gray-600">Waiting for host to start the match...</p>
-      <div class="flex justify-center mt-4">
-        <div class="w-6 h-6 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-      </div>
-    </section>
+    <p class="text-gray-600">Waiting for host to start the match...</p>
   </main>
 </body>
+
+<script>
+  document.getElementById('lobby-link').setAttribute("value", window.location)
+</script>
 
 </html>
