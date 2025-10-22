@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coding - Colosseum</title>
+  <script src="https://unpkg.com/htmx.org@2.0.3"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50 text-gray-900">
+  <header class="p-4 bg-white shadow flex justify-between items-center">
+    <h1 class="text-xl font-semibold">Binary Trees - Round #12</h1>
+    <button class="px-3 py-1 bg-gray-600 text-white rounded hover:bg-gray-700" hx-get="lobby.html" hx-target="body"
+      hx-swap="outerHTML">
+      Leave Match
+    </button>
+  </header>
+
+  <main class="max-w-6xl mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Problem Section -->
+    <section class="bg-white rounded-xl shadow p-4">
+      <h2 class="text-lg font-semibold mb-2">Problem Statement</h2>
+      <p class="text-sm text-gray-700">
+        Given the root of a binary tree, return its maximum depth...
+      </p>
+    </section>
+
+    <!-- Code Editor -->
+    <section class="bg-white rounded-xl shadow flex flex-col">
+      <div class="flex justify-between p-3 border-b">
+        <span class="font-semibold">Your Code</span>
+      </div>
+      <textarea class="flex-grow font-mono p-3 outline-none resize-none"
+        placeholder="// Write your code here..."></textarea>
+      <div class="p-3 flex gap-2 border-t justify-end">
+        <button class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700" hx-post="/run" hx-target="#output"
+          hx-swap="innerHTML">
+          Run
+        </button>
+        <button class="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700" hx-get="waiting.html"
+          hx-target="body" hx-swap="outerHTML">
+          Submit
+        </button>
+      </div>
+    </section>
+    <!-- Output -->
+    <section id="output" class="col-span-full bg-white rounded-xl shadow p-4">
+      <h3 class="font-semibold mb-2">Output</h3>
+      <p class="text-gray-500">No output yet. Run your code to see results.</p>
+    </section>
+  </main>
+</body>
+
+</html>

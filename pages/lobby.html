@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lobby - Colosseum</title>
+  <script src="https://unpkg.com/htmx.org@2.0.3"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50 text-gray-900">
+  <header class="p-4 bg-white shadow flex justify-between items-center">
+    <h1 class="text-xl font-semibold">CodeArena Lobby</h1>
+    <button class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700">Log Out</button>
+  </header>
+
+  <main class="max-w-4xl mx-auto p-6">
+    <h2 class="text-2xl font-semibold mb-4">Available Matches</h2>
+    <div class="space-y-4">
+      <!-- Example match -->
+      <div class="bg-white rounded-xl shadow p-4 flex justify-between items-center">
+        <div>
+          <p class="font-semibold">Round #12: Binary Trees</p>
+          <p class="text-sm text-gray-500">3/5 players joined</p>
+        </div>
+        <button class="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700" hx-get="coding.html"
+          hx-target="body" hx-swap="outerHTML">
+          Join
+        </button>
+      </div>
+
+      <div class="bg-white rounded-xl shadow p-4 flex justify-between items-center">
+        <div>
+          <p class="font-semibold">Round #13: Graph Paths</p>
+          <p class="text-sm text-gray-500">Waiting for players...</p>
+        </div>
+        <button class="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700" hx-get="coding.html"
+          hx-target="body" hx-swap="outerHTML">
+          Join
+        </button>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>
