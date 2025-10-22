@@ -22,7 +22,7 @@
       </button>
       <div class="flex items-center">
         <form class="flex border rounded-lg overflow-hidden"
-          onsubmit="window.location.href=`lobby/${this.lobbyId.value}`; return false;">
+          onsubmit="window.location.href=`lobby.html?code=${this.lobbyId.value}`; return false;">
           <input type="text" name="lobbyId" placeholder="Enter Lobby Code" class="px-3 py-2 outline-none w-40"
             required />
           <button type="submit" class="px-4 py-2 bg-green-600 text-white hover:bg-green-700">
