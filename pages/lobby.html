@@ -18,6 +18,8 @@
     </button>
   </header>
 
+  <section hx-get="/api/poll-start" hx-trigger="every 5s"></section>
+
   <main class="max-w-4xl mx-auto p-6 space-y-6">
     <!-- Lobby Info -->
     <div class="flex items-center">
@@ -38,6 +40,11 @@
       </ul>
     </section>
 
+
+    <form action="/api/start" method="post">
+     <input type="text" id="my-text" name="my-text">
+     <input type="submit" value="submit">
+    </form>
     <p class="text-gray-600">Waiting for host to start the match...</p>
   </main>
 </body>
