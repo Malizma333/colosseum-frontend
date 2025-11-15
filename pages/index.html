@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Colosseum</title>
+  <script src="https://unpkg.com/htmx.org@2.0.3"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen">
+  <main class="flex-grow flex flex-col items-center justify-center text-center p-6">
+    <img src="../assets/logo.png" alt="Colosseum Logo" class="w-96 h-96 mb-6" />
+    <h1 class="text-3xl font-bold mb-2">Welcome to Colosseum</h1>
+    <p class="text-gray-600 mb-8">A simple competitive programming platform.</p>
+
+    <div class="flex flex-col sm:flex-row gap-4">
+      <button class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-lg" hx-get="host.html"
+        hx-target="body" hx-swap="outerHTML">
+        Start a Lobby
+      </button>
+      <div class="flex items-center">
+        <form class="flex border rounded-lg overflow-hidden"
+          onsubmit="window.location.href=`lobby.html?code=${this.lobbyId.value}`; return false;">
+          <input type="text" name="lobbyId" placeholder="Enter Lobby Code" class="px-3 py-2 outline-none w-40"
+            required />
+          <button type="submit" class="px-4 py-2 bg-green-600 text-white hover:bg-green-700">
+            Join
+          </button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="text-center text-gray-400 text-sm py-4">
+    © 2025 Colosseum
+  </footer>
+</body>
+
+</html>

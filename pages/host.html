@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Host Lobby - Colosseum</title>
+  <script src="https://unpkg.com/htmx.org@2.0.3"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50 text-gray-900">
+  <header class="p-4 bg-white shadow flex justify-between items-center">
+    <h1 class="text-xl font-semibold">Host Lobby</h1>
+    <button class="px-3 py-1 bg-gray-600 text-white rounded hover:bg-gray-700" hx-get="index.html" hx-target="body"
+      hx-swap="outerHTML">
+      Exit
+    </button>
+  </header>
+
+  <main class="max-w-4xl mx-auto p-6 space-y-6">
+    <div class="flex items-center">
+      <input type="text" readonly id="lobby-link" class="flex-grow border rounded-l p-2 font-mono bg-gray-50" />
+      <button onclick="navigator.clipboard.writeText(document.getElementById('lobby-link').value)"
+        class="px-4 py-2 bg-blue-600 text-white rounded-r hover:bg-blue-700">
+        Copy
+      </button>
+    </div>
+
+    <section class="bg-white rounded-xl shadow p-6">
+      <h2 class="text-lg font-semibold mb-4">Lobby Settings</h2>
+      <form class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Mode</label>
+          <select class="mt-1 w-full border rounded p-2">
+            <option>Fastest</option>
+            <option>Shortest</option>
+            <option>Reverse</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Time Limit (min)</label>
+          <input type="number" min="1" max="60" value="5" class="mt-1 w-full border rounded p-2" />
+        </div>
+      </form>
+    </section>
+
+    <section class="bg-white rounded-xl shadow p-6">
+      <h2 class="text-lg font-semibold mb-4">Players</h2>
+      <ul class="space-y-2 text-gray-700">
+        <li>You (Host)</li>
+        <li>Alice</li>
+      </ul>
+    </section>
+
+    <div class="flex justify-end">
+      <button class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 text-lg" hx-get="coding.html"
+        hx-target="body" hx-swap="outerHTML">
+        Start Match
+      </button>
+    </div>
+  </main>
+</body>
+
+<script>
+  document.getElementById('lobby-link').setAttribute("value", window.location)
+</script>
+
+</html>
