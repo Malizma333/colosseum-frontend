@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -29,18 +29,19 @@
 
     <section class="bg-white rounded-xl shadow p-6">
       <h2 class="text-lg font-semibold mb-4">Lobby Settings</h2>
-      <form class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <form id="match-form" hx-post="/api/start-match" hx-target="body" hx-swap="outerHTML"
+        class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label class="block text-sm font-medium text-gray-700">Mode</label>
-          <select class="mt-1 w-full border rounded p-2">
-            <option>Fastest</option>
-            <option>Shortest</option>
-            <option>Reverse</option>
+          <select name="mode" class="mt-1 w-full border rounded p-2">
+            <option value="fast">Fastest</option>
+            <option value="short">Shortest</option>
+            <option value="reverse">Reverse</option>
           </select>
         </div>
         <div>
           <label class="block text-sm font-medium text-gray-700">Time Limit (min)</label>
-          <input type="number" min="1" max="60" value="5" class="mt-1 w-full border rounded p-2" />
+          <input name="time" type="number" min="1" max="60" value="5" class="mt-1 w-full border rounded p-2" />
         </div>
       </form>
     </section>
@@ -54,8 +55,8 @@
     </section>
 
     <div class="flex justify-end">
-      <button class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 text-lg" hx-get="coding.html"
-        hx-target="body" hx-swap="outerHTML">
+      <button class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 text-lg" type="submit"
+        form="match-form">
         Start Match
       </button>
     </div>
@@ -63,7 +64,9 @@
 </body>
 
 <script>
-  document.getElementById('lobby-link').setAttribute("value", window.location)
+  document
+    .getElementById("lobby-link")
+    .setAttribute("value", window.location);
 </script>
 
 </html>
