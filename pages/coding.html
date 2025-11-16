@@ -13,17 +13,17 @@
 <body class="bg-gray-50 text-gray-900">
   <header class="p-4 bg-white shadow flex justify-between items-center">
     <h1 class="text-xl font-semibold">Binary Trees - Fastest</h1>
-    <section id="ctrl-panel" hx-get="/api/coding-ctrl-panel" hx-trigger="load"></section>
-    <button class="px-3 py-1 bg-gray-600 text-white rounded hover:bg-gray-700" hx-get="index.html" hx-target="body"
-      hx-swap="outerHTML">
-      Exit
-    </button>
+    <div class="flex flex-row gap-2 items-center">
+      <section id="ctrl-panel" hx-get="/api/coding-ctrl-panel" hx-trigger="load"></section>
+      <a class="px-3 py-1 bg-gray-600 text-white rounded hover:bg-gray-700" href="/pages/index.html">
+        Exit
+      </a>
+    </div>
   </header>
 
   <section hx-get="/api/poll-end" hx-trigger="every 5s"></section>
 
   <main class="max-w-6xl mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-    <!-- Problem Section -->
     <section class="bg-white rounded-xl shadow p-4">
       <h2 class="text-lg font-semibold mb-2">Problem Statement</h2>
       <p class="text-sm text-gray-700">
@@ -31,32 +31,101 @@
       </p>
     </section>
 
-    <!-- Code Editor -->
     <section class="bg-white rounded-xl shadow flex flex-col">
-      <div class="flex justify-between p-3 border-b">
-        <span class="font-semibold">Your Code</span>
-      </div>
-      <form action="/api/submit" method="post">
-        <textarea class="flex-grow font-mono p-3 outline-none resize-none" name="code"
-          placeholder="// Write your code here..."></textarea>
-        <div class="p-3 flex gap-2 border-t justify-end">
-          <!-- maybe this one should be a seperate form? -->
-          <button class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700" hx-post="/run" hx-target="#output"
-            hx-swap="innerHTML">
-            Run
-          </button>
+      <h2 class="p-3 text-lg font-semibold">Editor</h2>
+      <div id="editor" class="h-96 border border-gray-700 overflow-auto"></div>
+      <div class="p-3 flex gap-2 border-t justify-end">
+        <form id="submit-form" action="/api/submit" method="post">
+          <input type="hidden" name="code" id="submit-code">
           <button class="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700" type="submit">
             Submit
           </button>
-        </div>
-      </form>
+        </form>
+        <form id="run-form" hx-post="/run" hx-target="#output" hx-swap="innerHTML">
+          <input type="hidden" name="code" id="run-code">
+          <button class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700" type="submit">
+            Run
+          </button>
+        </form>
+      </div>
     </section>
-    <!-- Output -->
     <section id="output" class="col-span-full bg-white rounded-xl shadow p-4">
       <h3 class="font-semibold mb-2">Output</h3>
       <p class="text-gray-500">No output yet. Run your code to see results.</p>
     </section>
   </main>
+
+  <footer class="fixed bottom-0 left-1/2 -translate-x-1/2 text-gray-500 text-sm p-4">
+    © 2025 Colosseum
+  </footer>
 </body>
+
+<script type="module">
+  import {
+    EditorView,
+    keymap, highlightSpecialChars, drawSelection, highlightActiveLine, dropCursor,
+    rectangularSelection, crosshairCursor,
+    lineNumbers, highlightActiveLineGutter
+  } from "https://esm.sh/@codemirror/view@6"
+  import { EditorState } from "https://esm.sh/@codemirror/state@6"
+  import {
+    defaultHighlightStyle, syntaxHighlighting, indentOnInput, bracketMatching,
+    foldGutter, foldKeymap
+  } from "https://esm.sh/@codemirror/language@6"
+  import { defaultKeymap, history, historyKeymap } from "https://esm.sh/@codemirror/commands@6"
+  import { searchKeymap, highlightSelectionMatches } from "https://esm.sh/@codemirror/search@6"
+  import { autocompletion, completionKeymap, closeBrackets, closeBracketsKeymap } from "https://esm.sh/@codemirror/autocomplete@6"
+  import { lintKeymap } from "https://esm.sh/@codemirror/lint@6"
+  import { oneDark } from "https://esm.sh/@codemirror/theme-one-dark@6";
+  import { python } from "https://esm.sh/@codemirror/lang-python@6";
+
+  const fixedHeightTheme = EditorView.theme({
+    "&": { height: "100%" }
+  });
+
+  const view = new EditorView({
+    parent: document.getElementById("editor"),
+    doc: "",
+    extensions: [
+      fixedHeightTheme,
+      lineNumbers(),
+      highlightActiveLineGutter(),
+      highlightSpecialChars(),
+      history(),
+      foldGutter(),
+      drawSelection(),
+      dropCursor(),
+      EditorState.allowMultipleSelections.of(true),
+      indentOnInput(),
+      python(),
+      syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
+      bracketMatching(),
+      closeBrackets(),
+      autocompletion(),
+      rectangularSelection(),
+      crosshairCursor(),
+      highlightActiveLine(),
+      highlightSelectionMatches(),
+      keymap.of([
+        ...closeBracketsKeymap,
+        ...defaultKeymap,
+        ...searchKeymap,
+        ...historyKeymap,
+        ...foldKeymap,
+        ...completionKeymap,
+        ...lintKeymap
+      ]),
+      oneDark,
+      EditorView.updateListener.of(update => {
+        if (update.docChanged) {
+          const code = update.state.doc.toString();
+          console.log(code);
+          document.getElementById("submit-code").value = code;
+          document.getElementById("run-code").value = code;
+        }
+      })
+    ]
+  })
+</script>
 
 </html>

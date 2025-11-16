@@ -13,12 +13,14 @@
 <body class="bg-gray-50 text-gray-900">
   <header class="p-4 bg-white shadow flex justify-between items-center">
     <h1 class="text-xl font-semibold">Waiting for Others...</h1>
-    <a class="px-3 py-1 bg-gray-600 text-white rounded hover:bg-gray-700" href="/pages/index.html">
-      Exit
-    </a>
-    <a class="px-3 py-1 bg-gray-600 text-white rounded hover:bg-gray-700" href="/api/return-to-lobby">
-      Loobby :D
-    </a>
+    <div class="flex flex-row gap-2 items-center">
+      <a class="px-3 py-1 bg-gray-600 text-white rounded hover:bg-gray-700" href="/pages/index.html">
+        Exit
+      </a>
+      <a class="px-3 py-1 bg-gray-600 text-white rounded hover:bg-gray-700" href="/api/return-to-lobby">
+        Lobby
+      </a>
+    </div>
   </header>
 
   <section hx-get="/api/poll-start" hx-trigger="every 5s"></section>
@@ -28,17 +30,13 @@
       hx-swap="outerHTML">
       <h2 class="text-lg font-semibold mb-4">Leaderboard</h2>
       <div id="leaderboard" class="space-y-2">
-        <div class="flex justify-between text-gray-700">
-          <span>Bob</span> <span>100%</span>
-        </div>
-        <div class="flex justify-between text-gray-700">
-          <span>You</span> <span>
-            <div class="w-6 h-6 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-          </span>
-        </div>
       </div>
     </div>
   </main>
+
+  <footer class="fixed bottom-0 left-1/2 -translate-x-1/2 text-gray-500 text-sm p-4">
+    © 2025 Colosseum
+  </footer>
 </body>
 
 </html>

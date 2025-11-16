@@ -9,43 +9,51 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-50 text-gray-900">
+<body class="min-h-screen bg-gray-50 text-gray-900">
   <header class="p-4 bg-white shadow flex justify-between items-center">
     <h1 class="text-xl font-semibold">Colosseum Lobby</h1>
-    <button class="px-3 py-1 bg-gray-600 text-white rounded hover:bg-gray-700" hx-get="index.html" hx-target="body"
-      hx-swap="outerHTML">
+    <a class="px-3 py-1 bg-gray-600 text-white rounded hover:bg-gray-700" href="/pages/index.html">
       Exit
-    </button>
+    </a>
   </header>
 
   <section hx-get="/api/poll-start" hx-trigger="every 5s"></section>
 
-  <main class="max-w-4xl mx-auto p-6 space-y-6">
-    <!-- Lobby Info -->
-    <div class="flex items-center">
-      <input type="text" readonly id="lobby-link" class="flex-grow border rounded-l p-2 font-mono bg-gray-50" />
-      <button onclick="navigator.clipboard.writeText(document.getElementById('lobby-link').value)"
-        class="px-4 py-2 bg-blue-600 text-white rounded-r hover:bg-blue-700">
-        Copy
+  <main class="flex-grow max-w-4xl mx-auto p-6 space-y-6">
+    <div class="flex items-center"> <input type="text" readonly id="lobby-link"
+        class="flex-grow border rounded-l p-2 font-mono bg-gray-50" />
+      <button id="copy-btn" onclick="copyLobbyLink()"
+        class="px-4 py-2 bg-blue-600 text-white rounded-r hover:bg-blue-700 relative">
+        <span id="copy-label">Copy</span>
       </button>
     </div>
 
-    <!-- Players List -->
     <h2 class="text-lg font-semibold mb-4">Players</h2>
-    <section id="player-list" class="bg-white rounded-xl shadow p-6" hx-get="/api/poll-users" hx-trigger="load, every 5s">
+    <section id="player-list" class="bg-white rounded-xl shadow p-6" hx-get="/api/poll-users"
+      hx-trigger="load, every 5s">
       <ul class="space-y-2 text-gray-700">
-        <li>Bob (Host)</li>
-        <li>You</li>
       </ul>
     </section>
 
     <section id="ctrl-panel" hx-get="/api/lobby-ctrl-panel" hx-trigger="load"></section>
-
   </main>
+
+  <footer class="fixed bottom-0 left-1/2 -translate-x-1/2 text-gray-500 text-sm p-4">
+    © 2025 Colosseum
+  </footer>
 </body>
 
 <script>
   document.getElementById('lobby-link').setAttribute("value", window.location)
+
+  function copyLobbyLink() {
+    const value = document.getElementById("lobby-link").value;
+    navigator.clipboard.writeText(value);
+
+    const label = document.getElementById("copy-label");
+    label.textContent = "Copied!";
+    setTimeout(() => (label.textContent = "Copy"), 500);
+  }
 </script>
 
 </html>
