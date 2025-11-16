@@ -31,21 +31,16 @@
     </div>
 
     <!-- Players List -->
-    <section id="player-list" class="bg-white rounded-xl shadow p-6" hx-get="/api/lobby/ABC123/players"
-      hx-trigger="load, every 5s" hx-swap="outerHTML">
-      <h2 class="text-lg font-semibold mb-4">Players</h2>
+    <h2 class="text-lg font-semibold mb-4">Players</h2>
+    <section id="player-list" class="bg-white rounded-xl shadow p-6" hx-get="/api/poll-users" hx-trigger="load, every 5s">
       <ul class="space-y-2 text-gray-700">
         <li>Bob (Host)</li>
         <li>You</li>
       </ul>
     </section>
 
+    <section id="ctrl-panel" hx-get="/api/lobby-ctrl-panel" hx-trigger="load"></section>
 
-    <form action="/api/start" method="post">
-     <input type="text" id="my-text" name="my-text">
-     <input type="submit" value="submit">
-    </form>
-    <p class="text-gray-600">Waiting for host to start the match...</p>
   </main>
 </body>
 
