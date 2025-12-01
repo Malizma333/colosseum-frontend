@@ -10,7 +10,7 @@
 </head>
 
 <body class="min-h-screen bg-gray-50 text-gray-900">
-  <header class="p-4 bg-white shadow flex justify-between items-center">
+  <header class="p-4 bg-gray-200 shadow flex justify-between items-center border-b border-gray-500">
     <h1 class="text-xl font-semibold">Colosseum Lobby</h1>
     <a class="px-3 py-1 bg-gray-600 text-white rounded hover:bg-gray-700" href="/pages/index.html">
       Exit
@@ -20,13 +20,15 @@
   <section hx-get="/api/poll-start" hx-trigger="every 5s"></section>
 
   <main class="flex-grow max-w-4xl mx-auto p-6 space-y-6">
-    <div class="flex items-center"> <input type="text" readonly id="lobby-link"
-        class="flex-grow border rounded-l p-2 font-mono bg-gray-50" />
+    <div class="flex items-stretch h-10">
+      <input type="text" readonly id="lobby-link"
+        class="flex-grow p-2 font-mono bg-gray-50 border border-black border-r-0 box-border rounded-l" />
       <button id="copy-btn" onclick="copyLobbyLink()"
-        class="px-4 py-2 bg-blue-600 text-white rounded-r hover:bg-blue-700 relative">
+        class="px-4 py-2 bg-blue-600 text-white rounded-r hover:bg-blue-700 h-full">
         <span id="copy-label">Copy</span>
       </button>
     </div>
+
 
     <h2 class="text-lg font-semibold mb-4">Players</h2>
     <section id="player-list" class="bg-white rounded-xl shadow p-6" hx-get="/api/poll-users"
