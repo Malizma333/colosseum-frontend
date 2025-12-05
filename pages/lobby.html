@@ -48,9 +48,27 @@
 <script>
   document.getElementById('lobby-link').setAttribute("value", window.location)
 
+  function unsecuredCopyToClipboard(text) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      document.execCommand('copy');
+    } catch (err) {
+      console.error('Unable to copy to clipboard', err);
+    }
+    document.body.removeChild(textArea);
+  }
+
   function copyLobbyLink() {
     const value = document.getElementById("lobby-link").value;
-    navigator.clipboard.writeText(value);
+    if (navigator.clipboard !== undefined) {
+      navigator.clipboard.writeText(value);
+    } else {
+      unsecuredCopyToClipboard(value);
+    }
 
     const label = document.getElementById("copy-label");
     label.textContent = "Copied!";
