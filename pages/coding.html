@@ -24,12 +24,7 @@
   <section hx-get="/api/poll-end" hx-trigger="every 5s"></section>
 
   <main class="max-w-6xl mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-    <section class="bg-white rounded-xl shadow p-4">
-      <h2 class="text-lg font-semibold mb-2">Problem Statement</h2>
-      <p class="text-sm text-gray-700">
-        Given the root of a binary tree, return its maximum depth...
-      </p>
-    </section>
+    <section id="problem" hx-get="/api/problem" hx-trigger="load"></section>
 
     <section class="bg-white rounded-xl shadow flex flex-col">
       <h2 class="p-3 text-lg font-semibold">Editor</h2>
