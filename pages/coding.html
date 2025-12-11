@@ -24,7 +24,7 @@
   <section hx-get="/api/poll-end" hx-trigger="every 5s"></section>
 
   <main class="max-w-6xl mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-    <section id="problem" hx-get="/api/problem" hx-trigger="load"></section>
+    <section class="overflow-y-scroll h-96" id="problem" hx-get="/api/problem" hx-trigger="load"></section>
 
     <section class="bg-white rounded-xl shadow flex flex-col">
       <h2 class="p-3 text-lg font-semibold">Editor</h2>
