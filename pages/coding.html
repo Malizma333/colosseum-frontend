@@ -26,7 +26,7 @@
   <main class="max-w-6xl mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
     <section class="bg-white rounded-xl shadow p-4">
       <h2 class="text-lg font-semibold mb-2">Problem Statement</h2>
-      <p class="text-sm text-gray-700">
+      <p class="text-sm text-gray-700 overflow-y-scroll h-96">
         Given the root of a binary tree, return its maximum depth...
       </p>
     </section>
@@ -61,65 +61,39 @@
 </body>
 
 <script type="module">
-  import {
-    EditorView,
-    keymap, highlightSpecialChars, drawSelection, highlightActiveLine, dropCursor,
-    rectangularSelection, crosshairCursor,
-    lineNumbers, highlightActiveLineGutter
-  } from "https://esm.sh/@codemirror/view@6"
-  import { EditorState } from "https://esm.sh/@codemirror/state@6"
-  import {
-    defaultHighlightStyle, syntaxHighlighting, indentOnInput, bracketMatching,
-    foldGutter, foldKeymap
-  } from "https://esm.sh/@codemirror/language@6"
+  import { EditorView, keymap, drawSelection, lineNumbers } from "https://esm.sh/@codemirror/view@6"
+  import { defaultHighlightStyle, syntaxHighlighting, indentOnInput, bracketMatching } from "https://esm.sh/@codemirror/language@6"
   import { defaultKeymap, history, historyKeymap } from "https://esm.sh/@codemirror/commands@6"
-  import { searchKeymap, highlightSelectionMatches } from "https://esm.sh/@codemirror/search@6"
   import { autocompletion, completionKeymap, closeBrackets, closeBracketsKeymap } from "https://esm.sh/@codemirror/autocomplete@6"
-  import { lintKeymap } from "https://esm.sh/@codemirror/lint@6"
   import { oneDark } from "https://esm.sh/@codemirror/theme-one-dark@6";
   import { python } from "https://esm.sh/@codemirror/lang-python@6";
 
-  const fixedHeightTheme = EditorView.theme({
-    "&": { height: "100%" }
-  });
-
-  const view = new EditorView({
+  new EditorView({
     parent: document.getElementById("editor"),
     doc: "",
     extensions: [
-      fixedHeightTheme,
+      EditorView.theme({
+        "&": { height: "100%" }
+      }),
       lineNumbers(),
-      highlightActiveLineGutter(),
-      highlightSpecialChars(),
       history(),
-      foldGutter(),
-      drawSelection(),
-      dropCursor(),
-      EditorState.allowMultipleSelections.of(true),
       indentOnInput(),
       python(),
       syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
       bracketMatching(),
       closeBrackets(),
       autocompletion(),
-      rectangularSelection(),
-      crosshairCursor(),
-      highlightActiveLine(),
-      highlightSelectionMatches(),
+      drawSelection(),
       keymap.of([
-        ...closeBracketsKeymap,
         ...defaultKeymap,
-        ...searchKeymap,
         ...historyKeymap,
-        ...foldKeymap,
+        ...closeBracketsKeymap,
         ...completionKeymap,
-        ...lintKeymap
       ]),
       oneDark,
       EditorView.updateListener.of(update => {
         if (update.docChanged) {
           const code = update.state.doc.toString();
-          console.log(code);
           document.getElementById("submit-code").value = code;
           document.getElementById("run-code").value = code;
         }
